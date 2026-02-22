@@ -25,12 +25,13 @@ def handle_text(message):
     elif message.text == "Ціни 💰":
         bot.send_message(message.chat.id, "Ціни починаються від 15 грн. Найсвіжіші — зранку!")
     
-    else:
-        bot.send_message(message.chat.id, "Я просто бот, краще натисніть на кнопку!")
    elif message.text == "🛍️ Замовити":
     msg =
 bot.send_message(message.chat.id, "Напишіть, що саме ви хочете замовити і скільки?")
-
+ 
+else:
+    bot.send_message(message.chat.id, "Я просто бот, краще натисніть на кнопку!")
+     
 bot.register_next_step_hardler(msg,send_order_to_me)
 
 def send_order_to_me(message):
@@ -43,4 +44,5 @@ bot.send_message(my_id, f"🔔 ЗАМОВЛЕННЯ від @{user_name}:\n{messa
     bot.send_message(message.chat.id, "✅ Замовлення надіслано! Ми зв'яжемося з вами.")
     
 bot.polling(none_stop=True)
+
 
