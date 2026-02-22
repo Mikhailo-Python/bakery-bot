@@ -6,7 +6,7 @@ bot = telebot.TeleBot("8351581204:AAGSD2UU9A0XhSOp8SaD2ezdDihHaeaSFQ8")
 @bot.message_handler(commands=['start'])
 def start(message):
     markup = types.ReplyKeyboardMarkup(resize_keyboard=True)
-    btn1 = types.KeyboardButton("Меню 🥯")
+    btn1 = types.KeyboardButton("Меню 🥐")
     btn2 = types.KeyboardButton("Де купити? 🔎")
     btn3 = types.KeyboardButton("Ціни 💰")
     btn4 = types.KeyboardButton("Замовити")
@@ -15,7 +15,7 @@ def start(message):
 
 @bot.message_handler(func=lambda message: True)
 def handle_text(message):
-    if message.text == "Меню 🥯":
+    if message.text == "Меню 🥐":
         bot.send_message(message.chat.id, "У нас є:\n- З маком\n- З повидлом\n- З сиром\n- Знаменита булочка з корицею!")
     elif message.text == "Де купити? 🔎":
         bot.send_message(message.chat.id, "Шукайте нас на автостанції та в центрі Іршанська!")
@@ -37,6 +37,7 @@ def send_order_to_me(message):
     bot.send_message(message.chat.id, "✅ Замовлення надіслано! Ми зв'яжемося з вами.")
 
 bot.polling(none_stop=True)
+
 
 
 
