@@ -1,7 +1,7 @@
 import telebot
 from telebot import types
 
-bot = telebot.TeleBot("8351581204:AAGSD2UU9A0XhSOp8SaD2ezdDihHaeaSFQ8")
+bot = telebot.TeleBot(os.gentenv("BOT_TOKEN"))
 
 @bot.message_handler(commands=['start'])
 def start(message):
@@ -37,6 +37,7 @@ def send_order_to_me(message):
     bot.send_message(message.chat.id, "✅ Замовлення прийнято! Скоро зв'яжемося.")
 
 bot.polling(none_stop=True)
+
 
 
 
