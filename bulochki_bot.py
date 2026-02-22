@@ -9,7 +9,8 @@ def start(message):
     btn1 = types.KeyboardButton("Меню 🥐")
     btn2 = types.KeyboardButton("Де купити? 📍")
     btn3 = types.KeyboardButton("Ціни 💰")
-    markup.add(btn1, btn2, btn3)
+    btn4 = types.Keyboardbutton("Замовити🛍️")
+    markup.add(btn1, btn2, btn3, btn4)
     
     bot.send_message(message.chat.id, "Ласкаво просимо до бота Іршанських булочок! Виберіть пункт меню:", reply_markup=markup)
 
@@ -26,5 +27,19 @@ def handle_text(message):
     
     else:
         bot.send_message(message.chat.id, "Я просто бот, краще натисніть на кнопку!")
+elif message.text == "🛍️ Замовити":
+    msg =
+bot.send_message(message.chat.id, "Напишіть, що саме ви хочете замовити і скільки?")
 
-bot.polling()
+bot.register_next_step_hardler(msg,send_order_to_me)
+
+def send_order_to_me(message):
+    my_id = 1312739397
+    user_name =
+message.from_user.username if
+message.from_user.username elif
+
+bot.send_message(my_id, f"🔔 ЗАМОВЛЕННЯ від @{user_name}:\n{message.text}")
+    bot.send_message(message.chat.id, "✅ Замовлення надіслано! Ми зв'яжемося з вами.")
+    
+bot.polling(none_stop=True)
