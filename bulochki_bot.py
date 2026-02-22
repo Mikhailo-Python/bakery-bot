@@ -25,25 +25,26 @@ def handle_text(message):
     elif message.text == "Ціни 💰":
         bot.send_message(message.chat.id, "Ціни починаються від 15 грн. Найсвіжіші — зранку!")
     
-   elif message.text == "🛍️ Замовити":
+   elif message.text == "Замовити🛍️":
     msg =
 bot.send_message(message.chat.id, "Напишіть, що саме ви хочете замовити і скільки?")
  
+bot.register_next_step_handler(msg,send_order_to_me)
+
 else:
     bot.send_message(message.chat.id, "Я просто бот, краще натисніть на кнопку!")
-     
-bot.register_next_step_handler(msg,send_order_to_me)
 
 def send_order_to_me(message):
     my_id = 1312739397
     user_name =
-message.from_user.username if
-message.from_user.username else "Клієнт без ніка"
+    message.from_user.username if
+    message.from_user.username else "Клієнт без ніка"
 
     bot.send_message(my_id, f"🔔 ЗАМОВЛЕННЯ від @{user_name}:\n{message.text}")
     bot.send_message(message.chat.id, "✅ Замовлення надіслано! Ми зв'яжемося з вами.")
     
 bot.polling(none_stop=True)
+
 
 
 
