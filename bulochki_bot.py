@@ -7,9 +7,9 @@ bot = telebot.TeleBot("8351581204:AAGSD2UU9A0XhSOp8SaD2ezdDihHaeaSFQ8")
 def start(message):
     markup = types.ReplyKeyboardMarkup(resize_keyboard=True)
     btn1 = types.KeyboardButton("Меню 🥐")
-    btn2 = types.KeyboardButton("Де купити? 🔎")
+    btn2 = types.KeyboardButton("Де купити? 📍")
     btn3 = types.KeyboardButton("Ціни 💰")
-    btn4 = types.KeyboardButton("Замовити")
+    btn4 = types.KeyboardButton("Замовити 🛍️")
     markup.add(btn1, btn2, btn3, btn4)
     bot.send_message(message.chat.id, "Ласкаво просимо до бота Іршанських булочок! Виберіть пункт меню:", reply_markup=markup)
 
@@ -17,11 +17,11 @@ def start(message):
 def handle_text(message):
     if message.text == "Меню 🥐":
         bot.send_message(message.chat.id, "У нас є:\n- З маком\n- З повидлом\n- З сиром\n- Знаменита булочка з корицею!")
-    elif message.text == "Де купити? 🔎":
+    elif message.text == "Де купити? 📍":
         bot.send_message(message.chat.id, "Шукайте нас на автостанції та в центрі Іршанська!")
     elif message.text == "Ціни 💰":
         bot.send_message(message.chat.id, "Ціни починаються від 15 грн. Найствіжіші — зранку!")
-    elif message.text == "Замовити":
+    elif message.text == "Замовити 🛍️":
         msg = bot.send_message(message.chat.id, "Напишіть, що саме ви хочете замовити і скільки?")
         bot.register_next_step_handler(msg, send_order_to_me)
     else:
@@ -37,6 +37,7 @@ def send_order_to_me(message):
     bot.send_message(message.chat.id, "✅ Замовлення надіслано! Ми зв'яжемося з вами.")
 
 bot.polling(none_stop=True)
+
 
 
 
