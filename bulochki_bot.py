@@ -37,13 +37,14 @@ def handle_text(message):
 def send_order_to_me(message):
     my_id = 1312739397
     user_name =
-    message.from_user.username if
-    message.from_user.username else "Клієнт без ніка"
+message.from_user.username if
+message.from_user.username else "Клієнт без ніка"
 
     bot.send_message(my_id, f"🔔 ЗАМОВЛЕННЯ від @{user_name}:\n{message.text}")
     bot.send_message(message.chat.id, "✅ Замовлення надіслано! Ми зв'яжемося з вами.")
     
 bot.polling(none_stop=True)
+
 
 
 
