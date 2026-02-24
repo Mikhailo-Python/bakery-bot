@@ -5,6 +5,9 @@ import json
 
 bot = telebot.TeleBot(os.getenv("BOT_TOKEN"))
 
+with open('menu.json', 'r', encoding='utf-8') as f:
+    menu_data = json.load(f)
+    
 @bot.message_handler(commands=['start'])
 def start(message):
     markup = types.ReplyKeyboardMarkup(resize_keyboard=True)
@@ -18,14 +21,20 @@ def start(message):
 @bot.message_handler(func=lambda message: True)
 def handle_text(message):
     if message.text == "Меню 🥐":
-        bot.send_message(message.chat.id, "У нас є:\n- З маком\n- З повидлом\n- З сиром\n- Знаменита булочка з корицею!")
+        names = ", ".join([item['name'] for item in menu_data.values()])
+        bot.send_message(message.chat.id, f"У нас є: {names}")
+
     elif message.text == "Де купити? 📍":
         bot.send_message(message.chat.id, "Шукайте нас на автостанції та в центрі Іршанська!")
+
     elif message.text == "Ціни 💰":
-        bot.send_message(message.chat.id, "Ціни починаються від 15 грн. Найствіжіші — зранку!")
-    elif message.text == "Замовити 🛍️":
+        prices_list = "\n".join([f"{v['name']} — {v['price']} грн" for v in menu_data.values()])
+        bot.send_message(message.chat.id, f"Наші ціни сьогодні:\n{prices_list}")
+
+    elif message.text == "Замовити 🛍️ ":
         msg = bot.send_message(message.chat.id, "Напишіть, що саме ви хочете замовити і скільки?")
         bot.register_next_step_handler(msg, send_order_to_me)
+
     else:
         bot.send_message(message.chat.id, "Я просто бот, краще натисніть на кнопку! 😊")
 
@@ -39,6 +48,7 @@ def send_order_to_me(message):
     bot.send_message(message.chat.id, "✅ Замовлення прийнято! Скоро зв'яжемося.")
 
 bot.polling(none_stop=True)
+
 
 
 
