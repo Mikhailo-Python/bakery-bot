@@ -5,7 +5,6 @@ import json
 
 bot = telebot.TeleBot(os.getenv("BOT_TOKEN"))
 
-# Завантажуємо меню з файлу
 with open('menu.json', 'r', encoding='utf-8') as f:
     menu_data = json.load(f)
 
@@ -41,15 +40,15 @@ def handle_text(message):
         bot.send_message(message.chat.id, "Я просто бот, краще натисніть на кнопку! 😊")
 
 def send_order_to_me(message):
-    my_id = 1312730397  # Твій ID
+    my_id = 1312730397
     user_info = f"@{message.from_user.username}" if message.from_user.username else message.from_user.first_name
     
-    # Відправляємо замовлення тобі
     bot.send_message(my_id, f"🔔 НОВЕ ЗАМОВЛЕННЯ!\nВід: {user_info}\nТекст: {message.text}")
     # Підтверджуємо клієнту
     bot.send_message(message.chat.id, "✅ Замовлення прийнято! Скоро зв'яжемося.")
 
 bot.polling(none_stop=True)
+
 
 
 
