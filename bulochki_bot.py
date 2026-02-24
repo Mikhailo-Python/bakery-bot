@@ -31,7 +31,7 @@ def handle_text(message):
         prices_list = "\n".join([f"{v['name']} — {v['price']} грн" for v in menu_data.values()])
         bot.send_message(message.chat.id, f"Наші ціни сьогодні:\n{prices_list}")
 
-    elif message.text == "Замовити 🛍️":
+   elif message.text == "Замовити 🛍":
         msg = bot.send_message(message.chat.id, "Напишіть, що саме ви хочете замовити і скільки?")
         bot.register_next_step_handler(msg, send_order_to_me)
 
@@ -48,6 +48,7 @@ def send_order_to_me(message):
     bot.send_message(message.chat.id, "✅ Замовлення прийнято! Скоро зв'яжемося.")
 
 bot.polling(none_stop=True)
+
 
 
 
