@@ -28,7 +28,6 @@ def handle_text(message):
         bot.send_message(message.chat.id, "Шукайте нас на автостанції та в центрі Іршанська!")
 
     elif message.text == "Ціни 💰":
-        # Тут тепер одинарні лапки для ключів — це важливо!
         prices_list = "\n".join([f"{v['name']} — {v['price']} грн" for v in menu_data.values()])
         bot.send_message(message.chat.id, f"Наші ціни сьогодні:\n{prices_list}")
 
@@ -48,6 +47,7 @@ def send_order_to_me(message):
     bot.send_message(message.chat.id, "✅ Замовлення прийнято! Скоро зв'яжемося.")
 
 bot.polling(none_stop=True)
+
 
 
 
