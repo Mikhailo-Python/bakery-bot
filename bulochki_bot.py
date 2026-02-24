@@ -37,7 +37,6 @@ def handle_text(message):
 
     else:
         bot.send_message(message.chat.id, "Я просто бот, краще натисніть на кнопку! 😊")
-
 def send_order_to_me(message):
     my_id = 1312739397
     user = message.from_user
@@ -48,6 +47,7 @@ def send_order_to_me(message):
     bot.send_message(message.chat.id, "✅ Замовлення прийнято! Скоро зв'яжемося.")
 
 bot.polling(none_stop=True)
+
 
 
 
