@@ -16,7 +16,7 @@ def start(message):
     btn3 = types.KeyboardButton("Ціни 💰")
     btn4 = types.KeyboardButton("Замовити 📦")
     markup.add(btn1, btn2, btn3, btn4)
-    bot.send_message(message.chat.id, "Ласкаво просимо до бота Іршанських булочок! Виберіть пункт меню:", reply_markup=markup)
+    bot.send_message(message.chat.id, "Виберіть пункт меню:", reply_markup=markup)
 
 @bot.message_handler(func=lambda message: True)
 def handle_text(message):
@@ -32,21 +32,20 @@ def handle_text(message):
         bot.send_message(message.chat.id, f"Наші ціни сьогодні:\n{prices_list}")
 
     elif message.text == "Замовити 📦":
-        msg = bot.send_message(message.chat.id, "Напишіть, що саме ви хочете замовити і скільки?")
+        msg = bot.send_message(message.chat.id, "Напишіть, що саме ви хочете замовити?")
         bot.register_next_step_handler(msg, send_order_to_me)
 
     else:
-        bot.send_message(message.chat.id, "Я просто бот, краще натисніть на кнопку! 😊")
+        bot.send_message(message.chat.id, "Використовуйте кнопки 😊")
 
 def send_order_to_me(message):
     my_id = 1312730397
     user_info = f"@{message.from_user.username}" if message.from_user.username else message.from_user.first_name
-    
-    bot.send_message(my_id, f"🔔 НОВЕ ЗАМОВЛЕННЯ!\nВід: {user_info}\nТекст: {message.text}")
-    
-    bot.send_message(message.chat.id, "✅ Замовлення прийнято! Скоро зв'яжемося.")
+    bot.send_message(my_id, f"🔔 ЗАМОВЛЕННЯ!\nВід: {user_info}\nТекст: {message.text}")
+    bot.send_message(message.chat.id, "✅ Прийнято!")
 
 bot.polling(none_stop=True)
+
 
 
 
