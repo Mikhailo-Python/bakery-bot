@@ -44,10 +44,11 @@ def send_order_to_me(message):
     user_info = f"@{message.from_user.username}" if message.from_user.username else message.from_user.first_name
     
     bot.send_message(my_id, f"🔔 НОВЕ ЗАМОВЛЕННЯ!\nВід: {user_info}\nТекст: {message.text}")
-    # Підтверджуємо клієнту
+    
     bot.send_message(message.chat.id, "✅ Замовлення прийнято! Скоро зв'яжемося.")
 
 bot.polling(none_stop=True)
+
 
 
 
