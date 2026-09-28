@@ -1,43 +1,4 @@
-import telebot
-from telebot import types
-import os
 
-bot = telebot.TeleBot(os.getenv("BOT_TOKEN"))
-
-@bot.message_handler(commands=['start'])
-def start(message):
-    markup = types.ReplyKeyboardMarkup(resize_keyboard=True)
-    btn1 = types.KeyboardButton("Меню 🥐")
-    btn2 = types.KeyboardButton("Де купити? 📍")
-    btn3 = types.KeyboardButton("Ціни 💰")
-    btn4 = types.KeyboardButton("Замовити 🛍")
-    markup.add(btn1, btn2, btn3, btn4)
-    bot.send_message(message.chat.id, "Ласкаво просимо до бота Іршанських булочок! Виберіть пункт меню:", reply_markup=markup)
-
-@bot.message_handler(func=lambda message: True)
-def handle_text(message):
-    if message.text == "Меню 🥐":
-        bot.send_message(message.chat.id, "У нас є:\n- З маком\n- З повидлом\n- З сиром\n- Знаменита булочка з корицею!")
-    elif message.text == "Де купити? 📍":
-        bot.send_message(message.chat.id, "Шукайте нас на автостанції та в центрі Іршанська!")
-    elif message.text == "Ціни 💰":
-        bot.send_message(message.chat.id, "Ціни починаються від 15 грн. Найствіжіші — зранку!")
-    elif message.text == "Замовити 🛍":
-        msg = bot.send_message(message.chat.id, "Напишіть, що саме ви хочете замовити і скільки?")
-        bot.register_next_step_handler(msg, send_order_to_me)
-    else:
-        bot.send_message(message.chat.id, "Я просто бот, краще натисніть на кнопку! 😊")
-
-def send_order_to_me(message):
-    my_id = 1312739397
-    user = message.from_user
-    name = f"{user.first_name} {user.last_name if user.last_name else ''}"
-    user_info = f"{name} (@{user.username})" if user.username else name
-    
-    bot.send_message(my_id, f"🚨 НОВЕ ЗАМОВЛЕННЯ!\n👤 Від: {user_info}\n🍞 Текст: {message.text}")
-    bot.send_message(message.chat.id, "✅ Замовлення прийнято! Скоро зв'яжемося.")
-
-bot.polling(none_stop=True)
 
 
 
